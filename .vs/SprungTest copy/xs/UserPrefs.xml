@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{9DE6C0AD-752C-67CF-716B-CB17F592B4FF}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Item.cs">
+    <Files>
+      <File FileName="Assets/Scripts/DisplaySlots.cs" Line="41" Column="6" />
+      <File FileName="Assets/Scripts/InvHandler.cs" Line="49" Column="1" />
+      <File FileName="Assets/Scripts/SlotUI.cs" Line="41" Column="74" />
+      <File FileName="Assets/Scripts/Item.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MouseCursor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SlotContent.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SprungTest copy" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Item.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cb07357b-8145-403b-b129-2237d8a6be04" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
