@@ -21,6 +21,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public Button removeItemButton;
 
+    public GameObject consumeButton;
+    public GameObject splitButton;
+    public GameObject readButton;
+
     private void Awake()
     {
         displaySlots = FindObjectOfType<DisplaySlots>();
@@ -122,6 +126,9 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         } else if (slotUI.slotContent.item.itemStackable == false)
         {
             RemoveItemNonStackable();
+        } else
+        {
+            return;
         }
     }
 
@@ -177,10 +184,29 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     {
         invHandler.isFollowing = true;
         yield return new WaitForSeconds(.1f);
-        this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
-        invHandler.itemDesc.text = this.slotContent.item.itemInfo;
         invHandler.rightClickMenu.SetActive(true);
         invHandler.isFollowing = false;
+        this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
+        invHandler.itemDesc.text = this.slotContent.item.itemInfo;
+
+        if (!slotContent.item.itemStackable)
+        {
+            consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
+            consumeButton.SetActive(false);
+            splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
+            splitButton.SetActive(false);
+            readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
+            readButton.SetActive(true);
+        } else
+        {
+            consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
+            consumeButton.SetActive(true);
+            splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
+            splitButton.SetActive(true);
+            readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
+            readButton.SetActive(false);
+        }
+      
     }
   
     public void DeselectAllItems()

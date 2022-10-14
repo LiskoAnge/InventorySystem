@@ -6,6 +6,9 @@ TagManager:
   tags:
   - tSlot
   - tTooltip
+  - Split
+  - Consume
+  - Read
   layers:
   - Default
   - TransparentFX
