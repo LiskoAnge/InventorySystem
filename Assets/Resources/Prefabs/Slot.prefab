@@ -98,6 +98,9 @@ MonoBehaviour:
   slotSelected: {fileID: 5405113099972392487}
   canSelect: 0
   removeItemButton: {fileID: 3341290182657623158, guid: e51b3c353f365405d81670e3f1fc813f, type: 3}
+  consumeButton: {fileID: 0}
+  splitButton: {fileID: 0}
+  readButton: {fileID: 0}
 --- !u!114 &4630149157571490993
 MonoBehaviour:
   m_ObjectHideFlags: 0

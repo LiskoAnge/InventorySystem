@@ -24,6 +24,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public GameObject consumeButton;
     public GameObject splitButton;
     public GameObject readButton;
+    public GameObject middleSpace;
 
     private void Awake()
     {
@@ -153,7 +154,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         {
             slotContent.Clear();
             DeselectAllItems();
-            //removeItemButton.onClick.RemoveAllListeners();
         }
     }
 
@@ -171,6 +171,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     {
         slotContent.Clear();
         DeselectAllItems();
+
     }
 
     public void SelectSlot()
@@ -183,7 +184,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     IEnumerator SlotSelected()
     {
         invHandler.isFollowing = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.001f);
         invHandler.rightClickMenu.SetActive(true);
         invHandler.isFollowing = false;
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
@@ -197,6 +198,8 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             splitButton.SetActive(false);
             readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
             readButton.SetActive(true);
+            middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
+            middleSpace.SetActive(false);
         } else
         {
             consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
@@ -205,6 +208,8 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             splitButton.SetActive(true);
             readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
             readButton.SetActive(false);
+            middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
+            middleSpace.SetActive(true);
         }
       
     }
