@@ -132,28 +132,39 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         {
             invHandler.rightClickMenu.SetActive(true);
         }
-        Debug.Log("this is a stackable item");
         removeItemButton = FindObjectOfType<ButtonReference>().removeButtonReference;
         removeItemButton.onClick.AddListener(ReduceAmount);
 
 
     }
 
-
     public void ReduceAmount()
     {
         slotContent.amount--;
+
+        if (slotContent.amount == 0)
+        {
+            slotContent.Clear();
+            DeselectAllItems();
+            //removeItemButton.onClick.RemoveAllListeners();
+        }
     }
 
     public void RemoveItemNonStackable()
     {
-        Debug.Log("this is a NON stackable item");
-        //removeItemButton = FindObjectOfType<ButtonReference>().removeButtonReference;
-        //removeItemButton.onClick.AddListener(ReduceAmount);
-        //slotContent.amount--;
-
+        if (!invHandler.rightClickMenu.activeSelf)
+        {
+            invHandler.rightClickMenu.SetActive(true);
+        }
+        removeItemButton = FindObjectOfType<ButtonReference>().removeButtonReference;
+        removeItemButton.onClick.AddListener(RemoveItem);
     }
 
+    public void RemoveItem()
+    {
+        slotContent.Clear();
+        DeselectAllItems();
+    }
 
     public void SelectSlot()
     {
