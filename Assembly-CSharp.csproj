@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5F23C8D1-94DE-3565-676E-127C6FE97540}</ProjectGuid>
+    <ProjectGuid>{6639B9AD-BAF2-E596-AF5B-B2226EFC32FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,14 +53,17 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets/Scripts/DisplaySlots.cs" />
     <Compile Include="Assets/Scripts/Item.cs" />
+    <Compile Include="Assets/ButtonReference.cs" />
     <Compile Include="Assets/Scripts/SlotContent.cs" />
     <Compile Include="Assets/Scripts/SlotUI.cs" />
     <Compile Include="Assets/Scenes/ItemSlot.cs" />
     <Compile Include="Assets/Scripts/MouseCursor.cs" />
     <Compile Include="Assets/Scripts/InvHandler.cs" />
-    <Compile Include="Assets/ButtonReference.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -91,10 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f85e058867a438f93688a7e3ca5b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSlotSelected: 0
   isMouseCursor: 0
   icon: {fileID: 6200725634086412341}
   amount: {fileID: 8453310614310660517}
   slotSelected: {fileID: 5405113099972392487}
+  canSelect: 0
+  removeItemButton: {fileID: 3341290182657623158, guid: e51b3c353f365405d81670e3f1fc813f, type: 3}
 --- !u!114 &4630149157571490993
 MonoBehaviour:
   m_ObjectHideFlags: 0

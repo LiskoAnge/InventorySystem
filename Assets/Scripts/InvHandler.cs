@@ -54,15 +54,13 @@ public class InvHandler : MonoBehaviour
         readItemInfo.SetActive(false);
     }
 
-    /*
+    
     public void DropItem()
     {
         theCursor.DeselectAllItems();
         rightClickMenu.SetActive(false);
         readItemInfo.SetActive(false);
-
-      
-    } */
+    } 
 
 
 }
