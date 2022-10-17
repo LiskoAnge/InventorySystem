@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class ButtonReference : MonoBehaviour
 {
-    public Button removeButtonReference;
+    public Button buttonRef;
 }

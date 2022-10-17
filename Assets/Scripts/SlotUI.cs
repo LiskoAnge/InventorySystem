@@ -19,12 +19,12 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public bool canSelect = false;
     private DisplaySlots displaySlots;
 
-    public Button removeItemButton;
-
     public GameObject consumeButton;
     public GameObject splitButton;
     public GameObject readButton;
     public GameObject middleSpace;
+
+    private Button dropItemButton;
 
     private void Awake()
     {
@@ -120,27 +120,34 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             DeselectAllItems();
         }
 
+ 
+
+        /*
+
         if (slotUI.slotContent.item.itemStackable)
         {
-            RemoveItemStackable();
+
+            //DropStackable();
 
         } else if (slotUI.slotContent.item.itemStackable == false)
         {
-            RemoveItemNonStackable();
-        } else
-        {
-            return;
-        }
+            //DropNonStackable();
+        } */
     }
 
 
-    public void RemoveItemStackable()
+
+ 
+
+
+    /*   ----------------------------------- CONSUME ---------------------------------------
+    public void DropItemStackable()
     {
         if (!invHandler.rightClickMenu.activeSelf)
         {
             invHandler.rightClickMenu.SetActive(true);
         }
-        removeItemButton = FindObjectOfType<ButtonReference>().removeButtonReference;
+        removeItemButton = FindObjectOfType<ButtonReference>().buttonRef;
         removeItemButton.onClick.AddListener(ReduceAmount);
 
 
@@ -157,13 +164,13 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         }
     }
 
-    public void RemoveItemNonStackable()
+    public void DropItemNonStackable()
     {
         if (!invHandler.rightClickMenu.activeSelf)
         {
             invHandler.rightClickMenu.SetActive(true);
         }
-        removeItemButton = FindObjectOfType<ButtonReference>().removeButtonReference;
+        removeItemButton = FindObjectOfType<ButtonReference>().buttonRef;
         removeItemButton.onClick.AddListener(RemoveItem);
     }
 
@@ -172,7 +179,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         slotContent.Clear();
         DeselectAllItems();
 
-    }
+    } */
 
     public void SelectSlot()
     {
@@ -186,6 +193,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         invHandler.isFollowing = true;
         yield return new WaitForSeconds(.001f);
         invHandler.rightClickMenu.SetActive(true);
+
+        dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
+        dropItemButton.onClick.RemoveAllListeners();
+
         invHandler.isFollowing = false;
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
         invHandler.itemDesc.text = this.slotContent.item.itemInfo;
@@ -211,11 +222,23 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
             middleSpace.SetActive(true);
         }
-      
+
+        dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
+        dropItemButton.onClick.AddListener(DropItem);
+
     }
-  
+
+
+    public void DropItem()
+    {
+        slotContent.Clear();
+        DeselectAllItems();
+    }
+
+   
     public void DeselectAllItems()
     {
+
         foreach (SlotUI item in displaySlots.UISlots)
         {
             item.DeselectSlot();
@@ -224,6 +247,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void DeselectSlot()
     {
+
         invHandler.isFollowing = true;
         invHandler.rightClickMenu.SetActive(false);
         invHandler.readItemInfo.SetActive(false);

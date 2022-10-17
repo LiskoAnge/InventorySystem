@@ -17,13 +17,13 @@ public class InvHandler : MonoBehaviour
     private SlotUI slotUI;
     public bool eliminateItem;
 
+
     private void Awake()
     {
         slotUI = gameObject.GetComponent<SlotUI>();
         isFollowing = true;
         readItemInfo.SetActive(false);
         rightClickMenu.SetActive(false);
-
     }
 
 
@@ -52,15 +52,18 @@ public class InvHandler : MonoBehaviour
         theCursor.DeselectAllItems();
         rightClickMenu.SetActive(false);
         readItemInfo.SetActive(false);
+
     }
 
-    
+
     public void DropItem()
     {
         theCursor.DeselectAllItems();
         rightClickMenu.SetActive(false);
         readItemInfo.SetActive(false);
     } 
+
+
 
 
 }
