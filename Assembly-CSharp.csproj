@@ -55,13 +55,14 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/DisplaySlots.cs" />
     <Compile Include="Assets/Scripts/Item.cs" />
-    <Compile Include="Assets/ButtonReference.cs" />
+    <Compile Include="Assets/Scripts/Buttons/ConsumeButton.cs" />
+    <Compile Include="Assets/Scripts/Buttons/ButtonReference.cs" />
+    <Compile Include="Assets/Scripts/Buttons/SplitButton.cs" />
     <Compile Include="Assets/Scripts/SlotContent.cs" />
     <Compile Include="Assets/Scripts/SlotUI.cs" />
     <Compile Include="Assets/Scenes/ItemSlot.cs" />
     <Compile Include="Assets/Scripts/MouseCursor.cs" />
     <Compile Include="Assets/Scripts/InvHandler.cs" />
-    <Compile Include="Assets/Scripts/ConsumeButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

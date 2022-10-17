@@ -8,6 +8,10 @@ public class SlotContent
     public bool isFull { get { return (item != null); } }
     public Item item;
     private int _amount;
+
+    public int newAmount;
+
+
     public int amount
     {
         get { return _amount; }
@@ -31,8 +35,6 @@ public class SlotContent
             RefreshSlotUI();
         }
     }
-
-
 
     private Item FindByName(string itemName)
     {
@@ -97,6 +99,12 @@ public class SlotContent
         RefreshSlotUI();
     }
 
+    public void RemoveFromStack(int toRemove)
+    {
+     
+        newAmount = amount -= toRemove;
+    }
+
     public SlotContent(string itemName, int _amount = 1)
     {
         Item _item = FindByName(itemName);
@@ -118,4 +126,7 @@ public class SlotContent
         item = null;
         amount = 0;
     }
+
+
+
 }

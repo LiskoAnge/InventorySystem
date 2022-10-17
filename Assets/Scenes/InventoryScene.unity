@@ -1139,6 +1139,7 @@ GameObject:
   - component: {fileID: 812928676}
   - component: {fileID: 812928675}
   - component: {fileID: 812928674}
+  - component: {fileID: 812928677}
   m_Layer: 5
   m_Name: SplitButton
   m_TagString: Split
@@ -1272,6 +1273,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812928672}
   m_CullTransparentMesh: 1
+--- !u!114 &812928677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812928672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e5deac8d8424baea00c9202af8f602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splitRef: {fileID: 812928674}
 --- !u!1 &852784722
 GameObject:
   m_ObjectHideFlags: 0
@@ -3270,8 +3284,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
