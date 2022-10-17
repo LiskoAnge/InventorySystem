@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3341290182657623156}
   - component: {fileID: 3341290182657623157}
   - component: {fileID: 3341290182657623158}
+  - component: {fileID: 8508640645598402856}
   m_Layer: 5
   m_Name: ConsumeButton
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8508640645598402856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341290182657623152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7b7d11e99804f528b6aa8e8f0c1d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumeRef: {fileID: 3341290182657623158}
 --- !u!1 &8041303648265519276
 GameObject:
   m_ObjectHideFlags: 0

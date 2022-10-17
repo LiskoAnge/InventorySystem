@@ -25,6 +25,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public GameObject middleSpace;
 
     private Button dropItemButton;
+    private Button consumeItemButton;
 
     private void Awake()
     {
@@ -193,11 +194,17 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         invHandler.isFollowing = true;
         yield return new WaitForSeconds(.001f);
         invHandler.rightClickMenu.SetActive(true);
+        invHandler.isFollowing = false;
 
         dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
         dropItemButton.onClick.RemoveAllListeners();
 
-        invHandler.isFollowing = false;
+        if (consumeItemButton != null)
+        {
+            consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
+            consumeItemButton.onClick.RemoveAllListeners();
+        }
+
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
         invHandler.itemDesc.text = this.slotContent.item.itemInfo;
 
@@ -226,6 +233,12 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
         dropItemButton.onClick.AddListener(DropItem);
 
+        if (slotContent.item.itemStackable)
+        {
+            consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
+            consumeItemButton.onClick.AddListener(ConsumeItem);
+        }
+    
     }
 
 
@@ -233,6 +246,17 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     {
         slotContent.Clear();
         DeselectAllItems();
+    }
+
+    public void ConsumeItem()
+    {
+        slotContent.amount--;
+
+        if (slotContent.amount == 0)
+        {
+            slotContent.Clear();
+            DeselectAllItems();
+        }
     }
 
    
