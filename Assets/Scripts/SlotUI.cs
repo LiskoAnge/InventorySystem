@@ -24,6 +24,9 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public GameObject readButton;
     public GameObject middleSpace;
 
+
+    public bool isSplitting;
+
     [Header ("RCM Buttons")]
     private Button dropItemButton;
     private Button consumeItemButton;
@@ -119,59 +122,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         {
             DeselectAllItems();
         }
-        /*
-
-        if (slotUI.slotContent.item.itemStackable)
-        {
-
-            //DropStackable();
-
-        } else if (slotUI.slotContent.item.itemStackable == false)
-        {
-            //DropNonStackable();
-        } */
     }
-
-    /*   ----------------------------------- CONSUME ---------------------------------------
-    public void DropItemStackable()
-    {
-        if (!invHandler.rightClickMenu.activeSelf)
-        {
-            invHandler.rightClickMenu.SetActive(true);
-        }
-        removeItemButton = FindObjectOfType<ButtonReference>().buttonRef;
-        removeItemButton.onClick.AddListener(ReduceAmount);
-
-
-    }
-
-    public void ReduceAmount()
-    {
-        slotContent.amount--;
-
-        if (slotContent.amount == 0)
-        {
-            slotContent.Clear();
-            DeselectAllItems();
-        }
-    }
-
-    public void DropItemNonStackable()
-    {
-        if (!invHandler.rightClickMenu.activeSelf)
-        {
-            invHandler.rightClickMenu.SetActive(true);
-        }
-        removeItemButton = FindObjectOfType<ButtonReference>().buttonRef;
-        removeItemButton.onClick.AddListener(RemoveItem);
-    }
-
-    public void RemoveItem()
-    {
-        slotContent.Clear();
-        DeselectAllItems();
-
-    } */
 
     public void SelectSlot()
     {
@@ -217,6 +168,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
             consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
             consumeItemButton.onClick.RemoveAllListeners();
+
+            isSplitting = false;
+            splitItemButton = FindObjectOfType<SplitButton>().splitRef;
+            splitItemButton.onClick.RemoveAllListeners();
         }
 
         dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
@@ -227,61 +182,38 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
             consumeItemButton.onClick.AddListener(ConsumeItem);
 
-           // splitItemButton = FindObjectOfType<SplitButton>().splitRef;
-            //splitItemButton.onClick.AddListener(SplitItem);
+            splitItemButton = FindObjectOfType<SplitButton>().splitRef;
+            splitItemButton.onClick.AddListener(SplitItem);
         } 
     }
 
     public void SplitItem()
     {
-        /*
-        if (slotContent.amount < 1)
-        {
-            Debug.Log("non e possibile splittare");
-        } */
 
-        foreach (SlotUI item in displaySlots.UISlots)
+        foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
         {
-            if (item.slotContent.amount == 0)
+            isSplitting = true;
+
+            if (!i.slotContent.isFull)
             {
-                Debug.Log("c'e una slot libera");
-                int halfStack = Mathf.RoundToInt(slotContent.amount / 2);
-
+                int halfStack = Mathf.RoundToInt(slotContent.amount / 2);   //if there is, split the amount in half 
                 slotContent.RemoveFromStack(halfStack);
+                Debug.Log("there is a free slot: " + i);
 
-                
-                //SlotContent splitStack = new SlotContent(slotContent.item.itemName, slotContent.newAmount);
-                //Debug.Log(nSlot.item.itemName + slotContent.newAmount);
-
-        
-               // displaySlots.items.Add(new SlotContent(splitStack.item.itemName, slotContent.newAmount));
-
-    
-
+                i.icon.enabled = true;
+                i.icon.sprite = slotContent.item.itemIcon;
+                i.amount.enabled = true;
+                i.amount.text = slotContent.newAmount.ToString();
             }
-            else 
+            else
             {
-                invHandler.readItemInfo.SetActive(true);
+                //invHandler.readItemInfo.SetActive(true);
                 invHandler.itemDesc.text = "You don't have any room to do that!";
                 invHandler.isFollowing = false;
             }
         }
-        /*
-        for (int i = 0; i < displaySlots.UISlots.Count; i++)
-        {
-            if (slotContent.amount == 0)
-            {
-                Debug.Log("c'e una slot libera");
-            } else
-            {
-                Debug.Log("tutte le slot sono occupate");
-            }
 
-        } */
-
-        //newContent = new SlotContent(slotContent.item.itemName, halfStack);
-
-        
+        isSplitting = false;
     }
 
     public void DropItem()
@@ -331,7 +263,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingIcon()
     {
-        if (slotContent == null || !slotContent.isFull)
+        if (slotContent == null || !slotContent.isFull && isSplitting == false)
         {
             icon.enabled = false;
         }
@@ -344,7 +276,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingAmount()
     {
-        if (slotContent == null || !slotContent.isFull || slotContent.amount < 2)
+        if (slotContent == null || !slotContent.isFull && isSplitting == false || slotContent.amount < 2)
         {
             amount.enabled = false;
         }
