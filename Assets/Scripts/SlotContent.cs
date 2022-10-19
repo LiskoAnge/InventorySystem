@@ -5,7 +5,19 @@ using UnityEngine;
 public class SlotContent
 {
     private SlotUI uiItemSlot;
-    public bool isFull { get { return (item != null); } }
+
+
+    public bool isFull {
+        get
+        {
+            return (item != null);
+        }
+        set
+        {
+
+        } 
+    }
+
     public Item item;
     private int _amount;
 

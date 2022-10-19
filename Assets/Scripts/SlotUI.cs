@@ -25,8 +25,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public GameObject middleSpace;
 
 
-    public bool isSplitting;
-
     [Header ("RCM Buttons")]
     private Button dropItemButton;
     private Button consumeItemButton;
@@ -169,7 +167,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
             consumeItemButton.onClick.RemoveAllListeners();
 
-            isSplitting = false;
             splitItemButton = FindObjectOfType<SplitButton>().splitRef;
             splitItemButton.onClick.RemoveAllListeners();
         }
@@ -189,21 +186,22 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void SplitItem()
     {
-
         foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
         {
-            isSplitting = true;
-
-            if (!i.slotContent.isFull)
+            if (i.isSlotSelected && !i.slotContent.isFull)
             {
+              
                 int halfStack = Mathf.RoundToInt(slotContent.amount / 2);   //if there is, split the amount in half 
                 slotContent.RemoveFromStack(halfStack);
-                Debug.Log("there is a free slot: " + i);
-
+                //Debug.Log("there is a free slot: " + i);
                 i.icon.enabled = true;
                 i.icon.sprite = slotContent.item.itemIcon;
                 i.amount.enabled = true;
                 i.amount.text = slotContent.newAmount.ToString();
+                // i.slotContent.isFull = true;
+                // Debug.Log(i.slotContent.isFull);
+                // Debug.Log("icon enabled when splitting? :" + icon.enabled);
+                return;  //prevent other empty slots to get filled with the splitted item
             }
             else
             {
@@ -212,8 +210,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
                 invHandler.isFollowing = false;
             }
         }
-
-        isSplitting = false;
     }
 
     public void DropItem()
@@ -263,7 +259,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingIcon()
     {
-        if (slotContent == null || !slotContent.isFull && isSplitting == false)
+        if (slotContent == null || !slotContent.isFull)
         {
             icon.enabled = false;
         }
@@ -276,7 +272,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingAmount()
     {
-        if (slotContent == null || !slotContent.isFull && isSplitting == false || slotContent.amount < 2)
+        if (slotContent == null || !slotContent.isFull|| slotContent.amount < 2)
         {
             amount.enabled = false;
         }
