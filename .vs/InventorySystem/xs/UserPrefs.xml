@@ -1,14 +1,14 @@
 ﻿<Properties StartupConfiguration="{6639B9AD-BAF2-E596-AF5B-B2226EFC32FD}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SlotContent.cs">
     <Files>
-      <File FileName="Assets/Scripts/InvHandler.cs" Line="43" Column="5" />
-      <File FileName="Assets/Scripts/SlotUI.cs" Line="196" Column="49" />
-      <File FileName="Assets/Scripts/Buttons/SplitButton.cs" />
+      <File FileName="Assets/Scripts/DisplaySlots.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/InvHandler.cs" />
+      <File FileName="Assets/Scripts/SlotContent.cs" Line="92" Column="20" />
+      <File FileName="Assets/Scripts/SlotUI.cs" />
       <File FileName="Assets/Scenes/ItemSlot.cs" />
-      <File FileName="Assets/Scripts/MouseCursor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/DisplaySlots.cs" />
+      <File FileName="Assets/Scripts/Buttons/SplitButton.cs" />
+      <File FileName="Assets/Scripts/MouseCursor.cs" />
       <File FileName="Assets/Scripts/Item.cs" />
-      <File FileName="Assets/Scripts/SlotContent.cs" Line="8" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,7 +18,7 @@
               <Node name="Scenes" expanded="True" />
               <Node name="Scripts" expanded="True">
                 <Node name="Buttons" expanded="True" />
-                <Node name="SlotContent.cs" selected="True" />
+                <Node name="DisplaySlots.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -28,7 +28,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c286d7c9-affa-4e72-a8a4-0a30492b25a2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cbc0aaff-ac3b-4430-98f2-c55215078743" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

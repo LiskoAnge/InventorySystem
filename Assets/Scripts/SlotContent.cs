@@ -80,6 +80,15 @@ public class SlotContent
         slot2.RefreshSlotUI();
     }
 
+    public static void SplitSlots(SlotContent stackSlot, SlotContent emptySlot)
+    {
+        Item _item = stackSlot.item;
+        int _amount = stackSlot.amount;
+        emptySlot.item = _item;
+        emptySlot.amount = _amount;
+        
+    }
+
     public void ConnectUI(SlotUI uiSlot)
     {
         uiItemSlot = uiSlot;

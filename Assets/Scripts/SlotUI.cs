@@ -12,7 +12,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     private InvHandler invHandler;
     public bool isMouseCursor = false;
-    public SlotContent slotContent, newContent;
+    public SlotContent slotContent;
     public Image icon;
     public TextMeshProUGUI amount;
     public Image slotSelected;
@@ -29,6 +29,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     private Button dropItemButton;
     private Button consumeItemButton;
     private Button splitItemButton;
+
 
     private void Awake()
     {
@@ -188,24 +189,19 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     {
         foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
         {
-            if (i.isSlotSelected && !i.slotContent.isFull)
+            if (!i.slotContent.isFull)   //if slot is not full, then
             {
-              
-                int halfStack = Mathf.RoundToInt(slotContent.amount / 2);   //if there is, split the amount in half 
+                invHandler.readItemInfo.SetActive(false);
+                int halfStack = Mathf.RoundToInt(slotContent.amount / 2);           //split the amount in half 
                 slotContent.RemoveFromStack(halfStack);
-                //Debug.Log("there is a free slot: " + i);
-                i.icon.enabled = true;
-                i.icon.sprite = slotContent.item.itemIcon;
-                i.amount.enabled = true;
-                i.amount.text = slotContent.newAmount.ToString();
-                // i.slotContent.isFull = true;
-                // Debug.Log(i.slotContent.isFull);
-                // Debug.Log("icon enabled when splitting? :" + icon.enabled);
-                return;  //prevent other empty slots to get filled with the splitted item
+                SlotContent.SplitSlots(slotContent, i.slotContent);
+                i.isSlotSelected = false;
+                return;
             }
-            else
+            else if (i.slotContent.isFull)
             {
-                //invHandler.readItemInfo.SetActive(true);
+                Debug.Log("all slots full");
+                invHandler.readItemInfo.SetActive(true);
                 invHandler.itemDesc.text = "You don't have any room to do that!";
                 invHandler.isFollowing = false;
             }
