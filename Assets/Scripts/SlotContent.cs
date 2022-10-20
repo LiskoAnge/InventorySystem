@@ -21,8 +21,6 @@ public class SlotContent
     public Item item;
     private int _amount;
 
-    public int newAmount;
-
 
     public int amount
     {
@@ -86,7 +84,12 @@ public class SlotContent
         int _amount = stackSlot.amount;
         emptySlot.item = _item;
         emptySlot.amount = _amount;
-        
+
+        emptySlot.uiItemSlot.isSlotSelected = false;
+        stackSlot.uiItemSlot.isSlotSelected = false;
+
+        stackSlot.RefreshSlotUI();
+        emptySlot.RefreshSlotUI();
     }
 
     public void ConnectUI(SlotUI uiSlot)
@@ -122,8 +125,7 @@ public class SlotContent
 
     public void RemoveFromStack(int toRemove)
     {
-     
-        newAmount = amount -= toRemove;
+        amount -= toRemove;
     }
 
     public SlotContent(string itemName, int _amount = 1)

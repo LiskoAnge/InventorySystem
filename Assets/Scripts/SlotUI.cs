@@ -63,7 +63,9 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     }
 
     private void LeftMouseClick(SlotUI click)
-    {     
+    {
+        DeselectAllItems();
+
         if (click == null)
         {
             Debug.Log("No SlotUI component in UI element tagged as SlotUI");
@@ -189,16 +191,23 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     {
         foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
         {
-            if (!i.slotContent.isFull)   //if slot is not full, then
+            if (!i.slotContent.isFull && slotContent.amount > 1)   //if slot is not full, then
             {
                 invHandler.readItemInfo.SetActive(false);
                 int halfStack = Mathf.RoundToInt(slotContent.amount / 2);           //split the amount in half 
                 slotContent.RemoveFromStack(halfStack);
                 SlotContent.SplitSlots(slotContent, i.slotContent);
-                i.isSlotSelected = false;
                 return;
             }
-            else if (i.slotContent.isFull)
+            else if (slotContent.amount <= 1)
+            {
+                Debug.Log("you can not split this");
+                invHandler.readItemInfo.SetActive(true);
+                invHandler.itemDesc.text = "You cannot split this item!";
+                invHandler.isFollowing = false;
+
+            }
+            else
             {
                 Debug.Log("all slots full");
                 invHandler.readItemInfo.SetActive(true);
@@ -207,7 +216,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             }
         }
     }
-
+         
     public void DropItem()
     {
         slotContent.Clear();
@@ -268,7 +277,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingAmount()
     {
-        if (slotContent == null || !slotContent.isFull|| slotContent.amount < 2)
+        if (slotContent == null || !slotContent.isFull || slotContent.amount == 1)    // || slotContent.amount < 2
         {
             amount.enabled = false;
         }
