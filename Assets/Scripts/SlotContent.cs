@@ -123,10 +123,16 @@ public class SlotContent
         RefreshSlotUI();
     }
 
-    public void RemoveFromStack(int toRemove)
+    public void RemoveEvenNumStack(int toRemove)
     {
         amount -= toRemove;
     }
+
+    public void RemoveOddNumStack(int toRemove)
+    {
+        amount -= toRemove;
+    }
+
 
     public SlotContent(string itemName, int _amount = 1)
     {

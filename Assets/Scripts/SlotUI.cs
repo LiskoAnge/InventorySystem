@@ -194,9 +194,20 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             if (!i.slotContent.isFull && slotContent.amount > 1)   //if slot is not full, then
             {
                 invHandler.readItemInfo.SetActive(false);
-                int halfStack = Mathf.RoundToInt(slotContent.amount / 2);           //split the amount in half 
-                slotContent.RemoveFromStack(halfStack);
-                SlotContent.SplitSlots(slotContent, i.slotContent);
+
+                if (slotContent.amount % 2 == 0)
+                {
+                    int halfStack = slotContent.amount / 2;           //split the amount in half -- try do here the adding removing thing for odd and even numbers
+                    slotContent.RemoveEvenNumStack(halfStack);
+                    SlotContent.SplitSlots(slotContent, i.slotContent);
+                }
+                else if (slotContent.amount % 2 == 1)
+                {
+                    int halfStack = slotContent.amount / 2;           //split the amount in half -- try do here the adding removing thing for odd and even numbers
+                    slotContent.RemoveOddNumStack(halfStack);
+                    SlotContent.SplitSlots(slotContent, i.slotContent);
+                    i.slotContent.amount -= 1;
+                } 
                 return;
             }
             else if (slotContent.amount <= 1)
@@ -215,6 +226,9 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
                 invHandler.isFollowing = false;
             }
         }
+
+    
+      
     }
          
     public void DropItem()
