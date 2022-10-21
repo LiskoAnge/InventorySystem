@@ -30,10 +30,13 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     private void Awake()
     {
+        icon.SetNativeSize();
+        icon.preserveAspect = true;
         displaySlots = FindObjectOfType<DisplaySlots>();
         invHandler = FindObjectOfType<InvHandler>();
         slotContent = new SlotContent();
     }
+
     private void Update()
     {
         invHandler.theCursor.transform.position = Input.mousePosition;

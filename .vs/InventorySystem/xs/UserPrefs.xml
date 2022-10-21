@@ -1,27 +1,24 @@
 ﻿<Properties StartupConfiguration="{6639B9AD-BAF2-E596-AF5B-B2226EFC32FD}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Buttons/InspectButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SlotUI.cs">
     <Files>
-      <File FileName="Assets/Scripts/DisplaySlots.cs" Line="19" Column="60" />
-      <File FileName="Assets/Scripts/InvHandler.cs" Line="47" Column="6" />
-      <File FileName="Assets/Scripts/SlotUI.cs" Line="152" Column="11" />
+      <File FileName="Assets/Scripts/DisplaySlots.cs" Line="11" Column="54" />
+      <File FileName="Assets/Scripts/InvHandler.cs" Line="20" Column="1" />
+      <File FileName="Assets/Scripts/SlotUI.cs" Line="35" Column="41" />
       <File FileName="Assets/Scripts/Item.cs" Line="4" Column="39" />
-      <File FileName="Assets/Scripts/SlotContent.cs" Line="21" Column="22" />
-      <File FileName="Assets/Scenes/ItemSlot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SlotContent.cs" Line="48" Column="15" />
       <File FileName="Assets/Scripts/Buttons/SplitButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MouseCursor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MouseCursor.cs" Line="23" Column="11" />
       <File FileName="Assets/Scripts/Buttons/ButtonReference.cs" Line="8" Column="23" />
-      <File FileName="Assets/Scripts/Buttons/InspectButton.cs" Line="7" Column="23" />
+      <File FileName="Assets/Scripts/Buttons/InspectButton.cs" Line="8" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="InventorySystem" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Scenes" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="Buttons" expanded="True">
-                  <Node name="InspectButton.cs" selected="True" />
-                </Node>
+                <Node name="Buttons" expanded="True" />
+                <Node name="SlotUI.cs" selected="True" />
               </Node>
             </Node>
           </Node>

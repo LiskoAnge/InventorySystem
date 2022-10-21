@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplaySlots : MonoBehaviour
 {
     GameObject Slot;
     public Transform inventoryPanel; 
     public List<SlotContent> items = new List<SlotContent>();
-    public bool oneSelected;
+    public List<SlotUI> UISlots = new List<SlotUI>();
 
     private void Start()
     {
@@ -27,8 +28,7 @@ public class DisplaySlots : MonoBehaviour
         }
         DisplayItems(items);
     }
-    public List<SlotUI> UISlots = new List<SlotUI>();
-
+  
     public void DisplayItems(List<SlotContent> slots)
     {
         for (int i = 0; i < slots.Count; i++)
