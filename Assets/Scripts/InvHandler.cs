@@ -18,9 +18,6 @@ public class InvHandler : MonoBehaviour
     public Vector3 offset;
     public Vector3 infoOffset;
 
-
-    SlotContent slotContent;
-
     private void Awake()
     {
         isFollowing = true;

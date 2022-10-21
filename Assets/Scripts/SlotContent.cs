@@ -5,22 +5,15 @@ using UnityEngine;
 public class SlotContent
 {
     private SlotUI uiItemSlot;
-
+    public Item item;
+    private int _amount;
 
     public bool isFull {
         get
         {
             return (item != null);
         }
-        set
-        {
-
-        } 
     }
-
-    public Item item;
-    private int _amount;
-
 
     public int amount
     {
@@ -52,7 +45,7 @@ public class SlotContent
         Item _item = Resources.Load<Item>(string.Format("Items/{0}", itemName)); 
         if (_item == null)
         {
-            Debug.LogWarning(string.Format("The item couldn't be found! \"{0}\". The item is empty.", itemName));
+            //Debug.LogWarning(string.Format("The item couldn't be found! \"{0}\". The item is empty.", itemName));
         }
         return _item;
     }
@@ -84,10 +77,8 @@ public class SlotContent
         int _amount = stackSlot.amount;
         emptySlot.item = _item;
         emptySlot.amount = _amount;
-
         emptySlot.uiItemSlot.isSlotSelected = false;
         stackSlot.uiItemSlot.isSlotSelected = false;
-
         stackSlot.RefreshSlotUI();
         emptySlot.RefreshSlotUI();
     }
@@ -133,7 +124,6 @@ public class SlotContent
         amount -= toRemove;
     }
 
-
     public SlotContent(string itemName, int _amount = 1)
     {
         Item _item = FindByName(itemName);
@@ -155,7 +145,4 @@ public class SlotContent
         item = null;
         amount = 0;
     }
-
-
-
 }

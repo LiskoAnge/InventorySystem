@@ -9,25 +9,24 @@ using System;
 public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 {
     private InvHandler invHandler;
-    public GameObject consumeButton;
-    public GameObject splitButton;
-    public GameObject actionButton;
-    public GameObject middleSpace;
-    public bool isMouseCursor = false;
+    private GameObject consumeButton;
+    private GameObject splitButton;
+    private GameObject actionButton;
+    private GameObject middleSpace;
 
+    public bool isMouseCursor = false;
     public bool isSlotSelected;
+
     public SlotContent slotContent;
+    private DisplaySlots displaySlots;
+    public Image slotSelected;
     public Image icon;
     public TextMeshProUGUI amount;
-    public Image slotSelected;
-    private DisplaySlots displaySlots;
-  
-    [Header ("Righ Click Menu Buttons")]
+
     private Button dropItemButton;
     private Button consumeItemButton;
     private Button splitItemButton;
     private Button inspectItemButton;
-
 
     private void Awake()
     {
@@ -65,7 +64,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
         if (click == null)
         {
-            Debug.Log("No SlotUI component in UI element tagged as SlotUI");
+            //Debug.Log("No SlotUI component in UI element tagged as SlotUI");
             return;
         }
 
@@ -110,7 +109,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
    {
         isSlotSelected = !isSlotSelected;
 
-        if (isSlotSelected && slotContent.amount != 0)    //do not select slot if already selected  empty
+        if (isSlotSelected && slotContent.amount != 0)
         {
             SelectSlot();
         } 
@@ -134,6 +133,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         invHandler.isFollowing = false;
         dropItemButton = FindObjectOfType<DropButton>().dropRef;
         dropItemButton.onClick.RemoveAllListeners();
+
+        inspectItemButton = FindObjectOfType<InspectButton>().inspectRef;
+        inspectItemButton.onClick.RemoveAllListeners();
+
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
 
         invHandler.itemDesc.text = slotContent.item.itemAction;
@@ -201,24 +204,23 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         invHandler.itemDesc.text = slotContent.item.itemInfo;
     }
 
-
     public void SplitItem()
     {
-        foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
+        foreach (SlotUI i in displaySlots.UISlots)    
         {
-            if (!i.slotContent.isFull && slotContent.amount > 1)   //if slot is not full, then
+            if (!i.slotContent.isFull && slotContent.amount > 1)   
             {
                 invHandler.infoItem.SetActive(false);
 
                 if (slotContent.amount % 2 == 0)
                 {
-                    int halfStack = slotContent.amount / 2;           //split the amount in half -- try do here the adding removing thing for odd and even numbers
+                    int halfStack = slotContent.amount / 2;         
                     slotContent.RemoveEvenNumStack(halfStack);
                     SlotContent.SplitSlots(slotContent, i.slotContent);
                 }
                 else if (slotContent.amount % 2 == 1)
                 {
-                    int halfStack = slotContent.amount / 2;           //split the amount in half -- try do here the adding removing thing for odd and even numbers
+                    int halfStack = slotContent.amount / 2;         
                     slotContent.RemoveOddNumStack(halfStack);
                     SlotContent.SplitSlots(slotContent, i.slotContent);
                     i.slotContent.amount -= 1;
@@ -227,15 +229,14 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             }
             else if (slotContent.amount <= 1)
             {
-                Debug.Log("you can not split this");
+                //Debug.Log("you can not split this");
                 invHandler.infoItem.SetActive(true);
                 invHandler.itemDesc.text = "You cannot split this item!";
                 invHandler.isFollowing = false;
-
             }
             else
             {
-                Debug.Log("all slots full");
+                //Debug.Log("all slots full");
                 invHandler.infoItem.SetActive(true);
                 invHandler.itemDesc.text = "You don't have any room to do that!";
                 invHandler.isFollowing = false;
@@ -262,7 +263,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void DeselectAllItems()
     {
-      
         foreach (SlotUI item in displaySlots.UISlots)
         {
             item.DeselectSlot();
@@ -304,7 +304,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void UpdatingAmount()
     {
-        if (slotContent == null || !slotContent.isFull || slotContent.amount == 1)    // || slotContent.amount < 2
+        if (slotContent == null || !slotContent.isFull || slotContent.amount == 1)   
         {
             amount.enabled = false;
         }
