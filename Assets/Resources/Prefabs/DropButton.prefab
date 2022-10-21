@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048102db490bc437b999cace1b6a565f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonRef: {fileID: 5167227658020127711}
+  dropRef: {fileID: 5167227658020127711}
 --- !u!1 &5167227659955411812
 GameObject:
   m_ObjectHideFlags: 0

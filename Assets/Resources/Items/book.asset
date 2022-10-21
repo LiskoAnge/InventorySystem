@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: book
   m_EditorClassIdentifier: 
   itemName: book
-  itemInfo: this is a book
+  itemInfo: This is a book.
+  itemAction: You can now use the teleport ability.
   itemIcon: {fileID: 21300000, guid: 92dadfd1bb1f840afb230e212beefe32, type: 3}
+  buttonText: Read
   itemID: 1
   maxStack: 1

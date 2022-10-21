@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonReference : MonoBehaviour
+public class InspectButton : MonoBehaviour
 {
-    public Button buttonRef;
+    public Button inspectRef;
 }

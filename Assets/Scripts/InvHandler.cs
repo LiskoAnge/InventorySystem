@@ -7,65 +7,61 @@ using TMPro;
 
 public class InvHandler : MonoBehaviour
 {
-    public GameObject rightClickMenu;
-    public GameObject readItemInfo;
+    [Header("Right Click Menu")]
+    public GameObject rcm;
+    public GameObject infoItem;
     public TextMeshProUGUI itemDesc;
+
+    [Header("Mouse Cursor")]
     public SlotUI theCursor;
     public bool isFollowing;
     public Vector3 offset;
     public Vector3 infoOffset;
-    private SlotUI slotUI;
-    public bool eliminateItem;
 
+
+    SlotContent slotContent;
 
     private void Awake()
     {
-        slotUI = gameObject.GetComponent<SlotUI>();
         isFollowing = true;
-        readItemInfo.SetActive(false);
-        rightClickMenu.SetActive(false);
+        infoItem.SetActive(false);
+        rcm.SetActive(false);
     }
-
 
     private void Update()
     {
         if (isFollowing == true)
         {
-            rightClickMenu.transform.position = Input.mousePosition + offset;
-            readItemInfo.transform.position = Input.mousePosition + infoOffset;
-        }
-        else
-        {
-            //Debug.Log("menu not following mouse cursor");
+            rcm.transform.position = Input.mousePosition + offset;
+            infoItem.transform.position = Input.mousePosition + infoOffset;
         }
     }
 
-    
-    public void ReadItemInfo()
+    public void ItemAction()
     {
-        rightClickMenu.SetActive(false);
-        readItemInfo.SetActive(true);
+        rcm.SetActive(false);
+        infoItem.SetActive(true);
+    }
+
+    public void InspectItem()
+    {
+        rcm.SetActive(false);
+        infoItem.SetActive(true);
     }
 
     public void CloseInfo()
     {
         theCursor.DeselectAllItems();
-        rightClickMenu.SetActive(false);
-        readItemInfo.SetActive(false);
-
+        rcm.SetActive(false);
+        infoItem.SetActive(false);
     }
-
 
     public void DropItem()
     {
         theCursor.DeselectAllItems();
-        rightClickMenu.SetActive(false);
-        readItemInfo.SetActive(false);
+        rcm.SetActive(false);
+        infoItem.SetActive(false);
     } 
-
-
-
-
 }
 
 

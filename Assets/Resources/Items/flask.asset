@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: flask
   m_EditorClassIdentifier: 
   itemName: flask
-  itemInfo: this is a flask
+  itemInfo: This is a flask.
+  itemAction: You can now use the magic ability.
   itemIcon: {fileID: 21300000, guid: fd025aa6b00534d3c931180405443c98, type: 3}
+  buttonText: Drink
   itemID: 2
   maxStack: 1

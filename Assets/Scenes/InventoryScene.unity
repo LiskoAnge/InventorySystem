@@ -1004,7 +1004,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1086865781}
         m_TargetAssemblyTypeName: InvHandler, Assembly-CSharp
-        m_MethodName: ReadItemInfo
+        m_MethodName: ItemAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1914,14 +1914,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa0ee8450d6847cfa0886c9c587028e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightClickMenu: {fileID: 1518609871}
-  readItemInfo: {fileID: 2060747201}
+  rcm: {fileID: 1518609871}
+  infoItem: {fileID: 2060747201}
   itemDesc: {fileID: 1630266819}
   theCursor: {fileID: 8003126898576608652}
   isFollowing: 0
   offset: {x: 100, y: -30, z: 0}
   infoOffset: {x: 0, y: 0, z: 0}
-  eliminateItem: 0
 --- !u!1 &1132567158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,6 +2862,7 @@ GameObject:
   - component: {fileID: 1408039425}
   - component: {fileID: 1408039424}
   - component: {fileID: 1408039423}
+  - component: {fileID: 1408039426}
   m_Layer: 5
   m_Name: InspectButton
   m_TagString: Untagged
@@ -2933,7 +2933,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1408039424}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1086865781}
+        m_TargetAssemblyTypeName: InvHandler, Assembly-CSharp
+        m_MethodName: InspectItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1408039424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,6 +2984,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408039421}
   m_CullTransparentMesh: 1
+--- !u!114 &1408039426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408039421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c6a3db71bbb4946a5f2d68e3c3107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectRef: {fileID: 1408039423}
 --- !u!1 &1424910965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,7 +3491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Read
+  m_text: Equip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6fe37f37e56a46a785c89aedadb5e50, type: 2}
   m_sharedMaterial: {fileID: 1265724043136401782, guid: b6fe37f37e56a46a785c89aedadb5e50, type: 2}
@@ -3670,7 +3695,7 @@ GameObject:
   - component: {fileID: 2060747204}
   - component: {fileID: 2060747203}
   m_Layer: 5
-  m_Name: ReadItemInfo
+  m_Name: ItemInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4103,13 +4128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f85e058867a438f93688a7e3ca5b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSlotSelected: 0
+  consumeButton: {fileID: 0}
+  splitButton: {fileID: 0}
+  actionButton: {fileID: 0}
+  middleSpace: {fileID: 0}
   isMouseCursor: 1
+  isSlotSelected: 0
   icon: {fileID: 852784723}
   amount: {fileID: 43425045}
   slotSelected: {fileID: 0}
-  canSelect: 0
-  consumeButton: {fileID: 0}
-  splitButton: {fileID: 0}
-  readButton: {fileID: 0}
-  middleSpace: {fileID: 0}

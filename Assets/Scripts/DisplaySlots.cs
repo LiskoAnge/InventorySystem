@@ -27,7 +27,6 @@ public class DisplaySlots : MonoBehaviour
         }
         DisplayItems(items);
     }
-
     public List<SlotUI> UISlots = new List<SlotUI>();
 
     public void DisplayItems(List<SlotContent> slots)

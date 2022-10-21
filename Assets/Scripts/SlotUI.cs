@@ -8,27 +8,25 @@ using System;
 
 public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 {
-    public bool isSlotSelected;
-
     private InvHandler invHandler;
+    public GameObject consumeButton;
+    public GameObject splitButton;
+    public GameObject actionButton;
+    public GameObject middleSpace;
     public bool isMouseCursor = false;
+
+    public bool isSlotSelected;
     public SlotContent slotContent;
     public Image icon;
     public TextMeshProUGUI amount;
     public Image slotSelected;
-    public bool canSelect = false;
     private DisplaySlots displaySlots;
-
-    public GameObject consumeButton;
-    public GameObject splitButton;
-    public GameObject readButton;
-    public GameObject middleSpace;
-
-
-    [Header ("RCM Buttons")]
+  
+    [Header ("Righ Click Menu Buttons")]
     private Button dropItemButton;
     private Button consumeItemButton;
     private Button splitItemButton;
+    private Button inspectItemButton;
 
 
     private void Awake()
@@ -53,7 +51,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         if (pointerData.button == PointerEventData.InputButton.Right)
         {
             RightMouseClick(gameObject.GetComponent<SlotUI>());
-
         }
         else
         {
@@ -88,12 +85,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             {
                 return;
             }
-
             if (click.slotContent.amount == click.slotContent.item.maxStack)
             {
                 return;
             }
-
             int total = invHandler.theCursor.slotContent.amount + click.slotContent.amount;
             int maxStack = invHandler.theCursor.slotContent.item.maxStack;
 
@@ -134,48 +129,28 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     IEnumerator SlotSelected()
     {
         invHandler.isFollowing = true;
-        yield return new WaitForSeconds(.001f);
-        invHandler.rightClickMenu.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        invHandler.rcm.SetActive(true);
         invHandler.isFollowing = false;
-
-        dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
+        dropItemButton = FindObjectOfType<DropButton>().dropRef;
         dropItemButton.onClick.RemoveAllListeners();
-
-
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 255);
-        invHandler.itemDesc.text = this.slotContent.item.itemInfo;
+
+        invHandler.itemDesc.text = slotContent.item.itemAction;
 
         if (!slotContent.item.itemStackable)
         {
-            consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
-            consumeButton.SetActive(false);
-            splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
-            splitButton.SetActive(false);
-            readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
-            readButton.SetActive(true);
-            middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
-            middleSpace.SetActive(false);
-
+            LoadStackButtons();
+        
         } else
         {
-            consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
-            consumeButton.SetActive(true);
-            splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
-            splitButton.SetActive(true);
-            readButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
-            readButton.SetActive(false);
-            middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
-            middleSpace.SetActive(true);
-
-            consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
-            consumeItemButton.onClick.RemoveAllListeners();
-
-            splitItemButton = FindObjectOfType<SplitButton>().splitRef;
-            splitItemButton.onClick.RemoveAllListeners();
+            LoadNonStackButtons();
         }
-
-        dropItemButton = FindObjectOfType<ButtonReference>().buttonRef;
+        dropItemButton = FindObjectOfType<DropButton>().dropRef;
         dropItemButton.onClick.AddListener(DropItem);
+
+        inspectItemButton = FindObjectOfType<InspectButton>().inspectRef;
+        inspectItemButton.onClick.AddListener(InspectItem);
 
         if (slotContent.item.itemStackable)
         {
@@ -187,13 +162,53 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
         } 
     }
 
+    public void LoadStackButtons()
+    {
+        consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
+        consumeButton.SetActive(false);
+        splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
+        splitButton.SetActive(false);
+        actionButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
+        actionButton.SetActive(true);
+        if (actionButton != null)
+        {
+            TextMeshProUGUI actionText = actionButton.GetComponentInChildren<TextMeshProUGUI>();
+            actionText.text = slotContent.item.buttonText;
+        }
+        middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
+        middleSpace.SetActive(false);
+    }
+
+    public void LoadNonStackButtons()
+    {
+        consumeButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ConsumeButton");
+        consumeButton.SetActive(true);
+        splitButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/SplitButton");
+        splitButton.SetActive(true);
+        actionButton = GameObject.Find("Canvas/rightClickMenu/ButtonsContainer/ReadButton");
+        actionButton.SetActive(false);
+        middleSpace = GameObject.Find("Canvas/rightClickMenu/Decorations/middle");
+        middleSpace.SetActive(true);
+
+        consumeItemButton = FindObjectOfType<ConsumeButton>().consumeRef;
+        consumeItemButton.onClick.RemoveAllListeners();
+        splitItemButton = FindObjectOfType<SplitButton>().splitRef;
+        splitItemButton.onClick.RemoveAllListeners();
+    }
+
+    public void InspectItem()
+    {
+        invHandler.itemDesc.text = slotContent.item.itemInfo;
+    }
+
+
     public void SplitItem()
     {
         foreach (SlotUI i in displaySlots.UISlots)      //check if there is at least one empty slot
         {
             if (!i.slotContent.isFull && slotContent.amount > 1)   //if slot is not full, then
             {
-                invHandler.readItemInfo.SetActive(false);
+                invHandler.infoItem.SetActive(false);
 
                 if (slotContent.amount % 2 == 0)
                 {
@@ -213,7 +228,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             else if (slotContent.amount <= 1)
             {
                 Debug.Log("you can not split this");
-                invHandler.readItemInfo.SetActive(true);
+                invHandler.infoItem.SetActive(true);
                 invHandler.itemDesc.text = "You cannot split this item!";
                 invHandler.isFollowing = false;
 
@@ -221,14 +236,11 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
             else
             {
                 Debug.Log("all slots full");
-                invHandler.readItemInfo.SetActive(true);
+                invHandler.infoItem.SetActive(true);
                 invHandler.itemDesc.text = "You don't have any room to do that!";
                 invHandler.isFollowing = false;
             }
         }
-
-    
-      
     }
          
     public void DropItem()
@@ -250,6 +262,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
 
     public void DeselectAllItems()
     {
+      
         foreach (SlotUI item in displaySlots.UISlots)
         {
             item.DeselectSlot();
@@ -259,8 +272,8 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     public void DeselectSlot()
     {
         invHandler.isFollowing = true;
-        invHandler.rightClickMenu.SetActive(false);
-        invHandler.readItemInfo.SetActive(false);
+        invHandler.rcm.SetActive(false);
+        invHandler.infoItem.SetActive(false);
         this.slotSelected.GetComponent<Image>().color = new Color32(255, 255, 225, 0);
     }
 
