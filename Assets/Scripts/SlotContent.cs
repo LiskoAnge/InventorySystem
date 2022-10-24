@@ -39,6 +39,14 @@ public class SlotContent
         }
     }
 
+    private bool isConnectedToUI
+    {
+        get
+        {
+            return (uiItemSlot != null);
+        }
+    }
+
     private Item FindByName(string itemName)
     {
         itemName = itemName.ToLower(); 
@@ -95,8 +103,6 @@ public class SlotContent
         uiItemSlot.ClearSlot();
         uiItemSlot = null;
     }
-
-    private bool isConnectedToUI { get { return (uiItemSlot != null); } }
 
     public void RefreshSlotUI()
     {

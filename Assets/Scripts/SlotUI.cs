@@ -14,9 +14,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerUpHandler
     private GameObject actionButton;
     private GameObject middleSpace;
 
-    public bool isMouseCursor = false;
     public bool isSlotSelected;
-
     public SlotContent slotContent;
     private DisplaySlots displaySlots;
     public Image slotSelected;

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public class InvHandler : MonoBehaviour
@@ -10,7 +8,7 @@ public class InvHandler : MonoBehaviour
     [Header("Right Click Menu")]
     public GameObject rcm;
     public GameObject infoItem;
-    public TextMeshProUGUI itemDesc;
+   public TextMeshProUGUI itemDesc;
 
     [Header("Mouse Cursor")]
     public SlotUI theCursor;
